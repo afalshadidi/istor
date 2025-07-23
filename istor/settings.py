@@ -37,7 +37,7 @@ ROOT_URLCONF = 'istor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 👈 هذا يربط Django بمجلد القوالب العام
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +75,13 @@ USE_TZ = True
 
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
-STATIC_URL = 'static/'
+# Static files settings (CSS, JS, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # ملفات التطوير
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # ملفات الإنتاج (collectstatic)
+
+# Media files (User uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
