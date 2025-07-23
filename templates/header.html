@@ -1,8 +1,42 @@
-<header style="position: fixed; top: 0; right: 0; left: 0; z-index: 1000; background: linear-gradient(to left, #6d28d9, #4c1d95); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; font-family: 'Tajawal', sans-serif;">
-  <div style="font-size: 24px; font-weight: bold;">iStor</div>
-  <nav>
-    <a href="/" style="color: white; margin: 0 10px; text-decoration: none;">الرئيسية</a>
-    <a href="/login" style="color: white; margin: 0 10px; text-decoration: none;">تسجيل الدخول</a>
-    <a href="/register" style="color: white; margin: 0 10px; text-decoration: none;">إنشاء حساب</a>
-  </nav>
-</header>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    header {
+      background: linear-gradient(to left, #d4af37, #a7a7a7, #008080);
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-family: 'Tajawal', sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>iStor | متجر الأجهزة</h1>
+    <nav>
+      <a href="/">الرئيسية</a>
+      <a href="/store/products/">المنتجات</a>
+      <a href="/register/">إنشاء حساب</a>
+      <a href="/login/">تسجيل دخول</a>
+    </nav>
+  </header>
+</body>
+</html>
