@@ -9,6 +9,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# التطبيقات المثبتة
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
 ]
 
+# الميدلوير
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -34,6 +36,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'istor.urls'
 
+# إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -52,6 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'istor.wsgi.application'
 
+# قاعدة البيانات
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -59,6 +63,7 @@ DATABASES = {
     }
 }
 
+# التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -66,6 +71,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
 
@@ -73,15 +79,17 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# تعريب
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
-# Static files settings (CSS, JS, Images)
+# الملفات الثابتة
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # ملفات التطوير
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # ملفات الإنتاج (collectstatic)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Media files (User uploads)
+# ملفات الوسائط
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# إعدادات الحقول التلقائية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

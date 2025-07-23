@@ -1,30 +1,31 @@
 # istor/urls.py
 
-# istor/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from store.views import home_view  # استدعاء العرض
+from store.views import home_view
 
 urlpatterns = [
-    path('', home_view, name='home'),  # المسار الجذري - الصفحة الرئيسية
+    path('', home_view, name='home'),
+
+    # لوحة التحكم
     path('admin/', admin.site.urls),
-    
-    # مسارات تطبيق المتجر
+
+    # المتجر
     path('store/', include('store.urls')),
 
-    # مسارات الحسابات
-    path('register/', include('accounts.urls')),
-    path('login/', include('accounts.urls')),
-    path('logout/', include('accounts.urls')),
+    # الحسابات (جميع المسارات من نفس الملف)
+    path('', include('accounts.urls')),
 
-    # مسارات لوحة التحكم
+    # لوحة التحكم
     path('dashboard/', include('dashboard.urls')),
 ]
 
-# دعم ملفات media أثناء التطوير فقط
+# دعم ملفات media أثناء التطوير
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# دعم ملفات static أثناء التطوير (اختياري إن لم تستخدم collectstatic للعرض المباشر)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
