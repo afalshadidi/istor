@@ -1,20 +1,22 @@
 import os
 from pathlib import Path
-import environ
+from dotenv import load_dotenv
 
-# إعداد البيئة
-env = environ.Env(
-    DEBUG=(bool, True)  # الوضع الافتراضي للتطوير
-)
-environ.Env.read_env()  # تحميل القيم من .env
+# تحميل ملف .env
+load_dotenv()
 
-# المسار الأساسي
+# المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# المفاتيح والإعدادات الأساسية
-SECRET_KEY = env('SECRET_KEY', default='django-insecure-غير-آمن-للتطوير')
-DEBUG = env('DEBUG')
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+# المفتاح السري من .env
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+# وضع التصحيح
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
+# قائمة المضيفين المسموح بهم
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
@@ -25,12 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # التطبيقات المخصصة
     'store.apps.StoreConfig',
     'accounts.apps.AccountsConfig',
     'dashboard.apps.DashboardConfig',
 ]
 
-# الميدلوير
+# الميدل وير
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -41,14 +44,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# إعدادات الراوتر
 ROOT_URLCONF = 'istor.urls'
 
 # إعدادات القوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],  # مجلد القوالب الرئيسي
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,41 +77,44 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env('DB_PORT'),
+            'NAME': os.getenv("DB_NAME"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv("DB_PASSWORD"),
+            'HOST': os.getenv("DB_HOST"),
+            'PORT': os.getenv("DB_PORT"),
         }
     }
 
-# التحقق من كلمات المرور
+# التحقق من كلمة المرور
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
-
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
-# دعم الترجمة
-LOCALE_PATHS = [BASE_DIR / 'locale']
-
-# الملفات الثابتة
+# الملفات الثابتة (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# ملفات الوسائط
+# الملفات الإعلامية
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# إعداد الحقول التلقائية
+# نوع الحقل الافتراضي للموديل
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
