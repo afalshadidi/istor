@@ -1,13 +1,20 @@
 import os
 from pathlib import Path
+import environ
 
+# إعداد البيئة
+env = environ.Env(
+    DEBUG=(bool, True)  # الوضع الافتراضي للتطوير
+)
+environ.Env.read_env()  # تحميل القيم من .env
+
+# المسار الأساسي
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-k#3eu7x25a06h2xucj12gj_s+i1o4l+$lw8wa3cn8c2-tm4caa'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# المفاتيح والإعدادات الأساسية
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-غير-آمن-للتطوير')
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
@@ -34,6 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# إعدادات الراوتر
 ROOT_URLCONF = 'istor.urls'
 
 # إعدادات القوالب
@@ -55,13 +63,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'istor.wsgi.application'
 
-# قاعدة البيانات
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# إعداد قاعدة البيانات
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
+        }
+    }
 
 # التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
@@ -79,7 +99,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# تعريب
+# دعم الترجمة
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # الملفات الثابتة
@@ -91,5 +111,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# إعدادات الحقول التلقائية
+# إعداد الحقول التلقائية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
