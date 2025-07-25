@@ -17,14 +17,30 @@
       margin: 0;
       font-size: 32px;
     }
+    nav {
+      margin-top: 10px;
+    }
     nav a {
       color: white;
-      margin: 0 15px;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-login { background-color: #6d28d9; }
+    .btn-register { background-color: #10b981; }
+    .btn-logout { background-color: #ef4444; }
+    .welcome {
+      display: inline-block;
+      margin-right: 15px;
+      font-weight: bold;
+      color: #fff;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -32,10 +48,16 @@
   <header>
     <h1>iStor | متجر الأجهزة</h1>
     <nav>
-      <a href="/">الرئيسية</a>
-      <a href="/store/products/">المنتجات</a>
-      <a href="/register/">إنشاء حساب</a>
-      <a href="/login/">تسجيل دخول</a>
+      <a href="{% url 'home' %}">الرئيسية</a>
+      <a href="{% url 'product_list' %}">المنتجات</a>
+
+      {% if user.is_authenticated %}
+        <span class="welcome">مرحبًا، {{ user.username }}</span>
+        <a href="{% url 'logout' %}" class="btn-logout">تسجيل الخروج</a>
+      {% else %}
+        <a href="{% url 'register' %}" class="btn-register">إنشاء حساب</a>
+        <a href="{% url 'login' %}" class="btn-login">تسجيل دخول</a>
+      {% endif %}
     </nav>
   </header>
 </body>

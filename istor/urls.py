@@ -16,8 +16,8 @@ urlpatterns = [
     # المتجر
     path('store/', include('store.urls')),
 
-    # الحسابات
-    path('', include('accounts.urls')),
+    # الحسابات (تسجيل الدخول، إنشاء حساب، تسجيل الخروج)
+    path('accounts/', include('accounts.urls')),
 
     # لوحة تحكم المستخدمين
     path('dashboard/', include('dashboard.urls')),
