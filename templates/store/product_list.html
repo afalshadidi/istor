@@ -34,16 +34,21 @@
 
   <h2 style="text-align: center; margin-top: 30px;">قائمة المنتجات</h2>
 
-  <div class="product-list">
-    {% for product in products|slice:":10" %}
-      <div class="product">
-        <img src="/media/products/{{ product.name|slugify }}.jpg" alt="{{ product.name }}">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description|truncatewords:15 }}</p>
-        <strong style="color: #6d28d9;">{{ product.price }} ريال</strong>
-      </div>
-    {% endfor %}
-  </div>
+<div class="product-list">
+  {% for product in products|slice:":10" %}
+    <div class="product">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% else %}
+        <img src="/static/img/placeholder.jpg" alt="لا توجد صورة">
+      {% endif %}
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description|truncatewords:15 }}</p>
+      <strong style="color: #6d28d9;">{{ product.price }} ريال</strong>
+    </div>
+  {% endfor %}
+</div>
+
 
   {% include 'footer.html' %}
 </body>
