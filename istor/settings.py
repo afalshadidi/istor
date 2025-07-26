@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 ]
 
-# الوسيط (Middleware)
+# الوسطاء
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -66,7 +66,7 @@ TEMPLATES = [
 # إعدادات WSGI
 WSGI_APPLICATION = 'istor.wsgi.application'
 
-# قاعدة البيانات
+# إعدادات قاعدة البيانات
 if DEBUG:
     DATABASES = {
         'default': {
@@ -115,19 +115,16 @@ CLOUDINARY_STORAGE = {
 }
 
 MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
-
-# تفعيل https في Cloudinary دائمًا
 CLOUDINARY_SECURE = True
 
 # النوع الافتراضي للحقول
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# إعدادات البريد الإلكتروني عبر Gmail
+# إعدادات البريد الإلكتروني
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'afalshadidi@gmail.com'
-EMAIL_HOST_PASSWORD = 'fhteezqgjeukzmir'  # ✅ كلمة المرور بدون مسافات
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
