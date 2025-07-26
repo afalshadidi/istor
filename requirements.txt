@@ -1,20 +1,17 @@
-
-# Django core
-Django==5.2.4
-
-# دعم تحميل المتغيرات البيئية
-django-environ==0.12.0
-python-dotenv>=1.0.0
-
-# تحليل SQL (مطلوب ضمنياً لـ Django)
-sqlparse==0.5.3
-
-# للتعامل مع ImageField
-Pillow>=10.0.0
-
-# دعم ASGI
 asgiref==3.9.1
-
-# لمشاريع النشر (اختياري - يُستخدم في Render أو Heroku)
-gunicorn>=21.2.0         # لسيرفر الإنتاج
-psycopg2-binary>=2.9.9   # للاتصال بـ PostgreSQL
+certifi==2025.7.14
+charset-normalizer==3.4.2
+cloudinary==1.44.1
+Django==5.2.4
+django-cloudinary-storage==0.3.0
+django-environ==0.12.0
+gunicorn==23.0.0
+idna==3.10
+packaging==25.0
+pillow==11.3.0
+psycopg2-binary==2.9.10
+python-dotenv==1.1.1
+requests==2.32.4
+six==1.17.0
+sqlparse==0.5.3
+urllib3==2.5.0
