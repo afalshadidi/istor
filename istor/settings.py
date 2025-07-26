@@ -26,14 +26,11 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'accounts.apps.AccountsConfig',
     'dashboard.apps.DashboardConfig',
-]
 
-# إضافة مكتبة Cloudinary فقط في حالة الإنتاج
-if not DEBUG:
-    INSTALLED_APPS += [
-        'cloudinary',
-        'cloudinary_storage',
-    ]
+    # Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
+]
 
 # الوسيط (Middleware)
 MIDDLEWARE = [
@@ -108,18 +105,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# إعداد ملفات الميديا
-if DEBUG:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
-else:
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-    }
-    MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
+# Cloudinary إعداد
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+MEDIA_URL = f"https://res.cloudinary.com/{os.getenv('CLOUDINARY_CLOUD_NAME')}/"
+
+# تفعيل https في Cloudinary دائمًا
+CLOUDINARY_SECURE = True
 
 # النوع الافتراضي للحقول
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
