@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # إعدادات الأمان
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'istor.onrender.com']
 
 # التطبيقات المثبتة
 INSTALLED_APPS = [
@@ -129,6 +129,3 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
-print("🔍 ALLOWED_HOSTS =", ALLOWED_HOSTS)
-print("🔍 DEBUG =", DEBUG)
