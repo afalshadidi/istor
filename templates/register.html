@@ -34,7 +34,8 @@
     }
 
     input[type="text"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="email"] {
       width: 100%;
       padding: 10px;
       border: none;
@@ -75,7 +76,7 @@
 
   <div class="container">
     <h2>إنشاء حساب جديد</h2>
-    <form method="POST">
+    <form method="POST" action="">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">تسجيل</button>
