@@ -121,3 +121,13 @@ CLOUDINARY_SECURE = True
 
 # النوع الافتراضي للحقول
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# إعدادات البريد الإلكتروني عبر Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'afalshadidi@gmail.com'
+EMAIL_HOST_PASSWORD = 'fhteezqgjeukzmir'  # ✅ كلمة المرور بدون مسافات
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
